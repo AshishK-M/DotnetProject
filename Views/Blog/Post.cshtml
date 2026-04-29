@@ -1,0 +1,12 @@
+@model BlogPost
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<article>
+    <h1>@Model.Title</h1>
+    <p class="text-muted">By @Model.Author on @Model.PublishedOn.ToString("MMMM d, yyyy")</p>
+    <p>@Model.Body</p>
+</article>
+
+<a asp-action="Index" class="btn btn-link">&larr; Back to blog</a>

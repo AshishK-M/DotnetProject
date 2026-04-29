@@ -1,0 +1,93 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+
+<section class="home-hero">
+    <div class="home-hero__bg"></div>
+    <div class="home-hero__grid">
+        <div class="home-hero__content">
+            <span class="eyebrow">
+                <span class="eyebrow__dot"></span>
+                Now in beta · v1.0
+            </span>
+            <h1 class="home-hero__title">
+                Craft software that <span class="grad-text">feels effortless</span>.
+            </h1>
+            <p class="home-hero__lede">
+                MyMvcApp is a modern starting point for ASP.NET Core teams who care about
+                velocity, design, and the small details users never notice — until they're missing.
+            </p>
+            <div class="home-hero__cta">
+                <a asp-controller="Home" asp-action="Services" class="btn-primary-glow">Explore services</a>
+                <a asp-controller="Home" asp-action="About" class="btn-ghost-light">Learn more &rarr;</a>
+            </div>
+            <ul class="home-hero__meta">
+                <li><strong>4.9★</strong> rated by teams</li>
+                <li><strong>120+</strong> projects shipped</li>
+                <li><strong>14d</strong> avg. kickoff</li>
+            </ul>
+        </div>
+
+        <div class="home-hero__visual" aria-hidden="true">
+            <div class="orb orb--a"></div>
+            <div class="orb orb--b"></div>
+            <div class="orb orb--c"></div>
+            <div class="window">
+                <div class="window__chrome">
+                    <span></span><span></span><span></span>
+                    <em>mymvcapp.local</em>
+                </div>
+                <div class="window__body">
+                    <div class="line line--80"></div>
+                    <div class="line line--55"></div>
+                    <div class="line line--70"></div>
+                    <div class="chip-row">
+                        <span class="chip chip--indigo">.NET 8</span>
+                        <span class="chip chip--pink">Razor</span>
+                        <span class="chip chip--cyan">A11y</span>
+                    </div>
+                    <div class="bar"><span style="width:78%"></span></div>
+                    <div class="bar"><span style="width:46%"></span></div>
+                    <div class="bar"><span style="width:92%"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="home-features">
+    <header class="section-head">
+        <h2>Built around three ideas</h2>
+        <p>Speed without sloppiness. Beautiful without bloat. Robust without ceremony.</p>
+    </header>
+    <div class="mini-grid">
+        <article class="mini-card">
+            <div class="mini-card__num">01</div>
+            <h3>Fast by default</h3>
+            <p>Sensible defaults, lean payloads, and no unused dependencies clogging up the build.</p>
+        </article>
+        <article class="mini-card">
+            <div class="mini-card__num">02</div>
+            <h3>Designed, not decorated</h3>
+            <p>Type, spacing, and color chosen with intent — so every page feels considered.</p>
+        </article>
+        <article class="mini-card">
+            <div class="mini-card__num">03</div>
+            <h3>Quietly accessible</h3>
+            <p>Keyboard, screen-reader, and contrast checks baked in — not bolted on at the end.</p>
+        </article>
+    </div>
+</section>
+
+<section class="home-cta">
+    <div class="home-cta__inner">
+        <h2>Ready to get started?</h2>
+        <p>Browse what we offer or read a little about the philosophy behind the project.</p>
+        <div class="home-cta__buttons">
+            <a asp-controller="Home" asp-action="Services" class="btn-primary-glow">See services</a>
+            <a asp-controller="Home" asp-action="About" class="btn-ghost-dark">About the project</a>
+        </div>
+    </div>
+</section>

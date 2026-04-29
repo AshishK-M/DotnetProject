@@ -1,0 +1,20 @@
+@model IEnumerable<BlogPost>
+@{
+    ViewData["Title"] = "Blog";
+}
+
+<h1>Blog</h1>
+<p>Latest news and updates from the team.</p>
+
+<ul class="list-unstyled">
+    @foreach (var post in Model)
+    {
+        <li class="mb-4">
+            <h3>
+                <a asp-action="Post" asp-route-id="@post.Id">@post.Title</a>
+            </h3>
+            <small class="text-muted">By @post.Author on @post.PublishedOn.ToString("MMMM d, yyyy")</small>
+            <p>@post.Body</p>
+        </li>
+    }
+</ul>

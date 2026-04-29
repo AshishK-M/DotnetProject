@@ -1,0 +1,115 @@
+@{
+    ViewData["Title"] = "Services";
+}
+
+<link rel="stylesheet" href="~/css/services.css" asp-append-version="true" />
+
+<section class="services-hero">
+    <div class="services-hero__bg"></div>
+    <div class="services-hero__inner">
+        <span class="eyebrow">What we do</span>
+        <h1 class="services-hero__title">Build faster. Ship calmer.</h1>
+        <p class="services-hero__lede">
+            A focused suite of services that help your team move from idea to production
+            without the usual friction — strategy, design, engineering, and care.
+        </p>
+        <div class="services-hero__cta">
+            <a href="#offerings" class="btn-primary-glow">Explore services</a>
+            <a asp-controller="Home" asp-action="About" class="btn-ghost">About us &rarr;</a>
+        </div>
+    </div>
+</section>
+
+<section id="offerings" class="services-grid">
+    <header class="section-head">
+        <h2>Offerings</h2>
+        <p>Pick a single track or combine them — we shape the engagement around your goals.</p>
+    </header>
+
+    <div class="card-grid">
+        <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2 4 6v6c0 5 3.4 9.3 8 10 4.6-.7 8-5 8-10V6l-8-4z"/>
+                </svg>
+            </div>
+            <h3>Product Strategy</h3>
+            <p>Discovery sprints, roadmaps, and metrics that anchor the team to outcomes — not output.</p>
+            <span class="feature-card__tag">Discovery · Roadmaps</span>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>
+                </svg>
+            </div>
+            <h3>Web Engineering</h3>
+            <p>Robust ASP.NET Core, modern frontends, and clean APIs — built to be maintained, not rewritten.</p>
+            <span class="feature-card__tag">.NET · React · APIs</span>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="14" rx="2"/>
+                    <path d="M3 10h18M7 15h4"/>
+                </svg>
+            </div>
+            <h3>Design Systems</h3>
+            <p>Accessible components, tokens, and patterns that scale across teams and products.</p>
+            <span class="feature-card__tag">UI · A11y · Tokens</span>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 17V7l8-4 8 4v10l-8 4-8-4z"/>
+                    <path d="M4 7l8 4 8-4M12 11v10"/>
+                </svg>
+            </div>
+            <h3>Cloud &amp; DevOps</h3>
+            <p>CI/CD pipelines, observability, and infrastructure-as-code so deploys feel boring.</p>
+            <span class="feature-card__tag">Azure · CI/CD · IaC</span>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
+                </svg>
+            </div>
+            <h3>AI Integration</h3>
+            <p>Practical LLM features — search, copilots, summarization — wired into your existing product.</p>
+            <span class="feature-card__tag">RAG · Copilots</span>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12h4l3-9 4 18 3-9h4"/>
+                </svg>
+            </div>
+            <h3>Performance Audits</h3>
+            <p>Deep dives into Core Web Vitals, server response, and database hot paths — with a fix list.</p>
+            <span class="feature-card__tag">Profiling · CWV</span>
+        </article>
+    </div>
+</section>
+
+<section class="stats">
+    <div class="stat"><span class="stat__num">120+</span><span class="stat__label">Projects shipped</span></div>
+    <div class="stat"><span class="stat__num">98%</span><span class="stat__label">Client retention</span></div>
+    <div class="stat"><span class="stat__num">4.9★</span><span class="stat__label">Average rating</span></div>
+    <div class="stat"><span class="stat__num">14d</span><span class="stat__label">Avg. kickoff time</span></div>
+</section>
+
+<section class="cta">
+    <div class="cta__inner">
+        <h2>Have something in mind?</h2>
+        <p>Tell us about your project — we'll reply within one business day with a clear next step.</p>
+        <a asp-controller="Home" asp-action="About" class="btn-primary-glow">Start a conversation</a>
+    </div>
+</section>
+
