@@ -2,7 +2,166 @@
     ViewData["Title"] = "About";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="/">Abouteee</a>.</p>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+    * { box-sizing: border-box; }
+
+    .hero {
+        margin: 20px 24px;
+        border-radius: 20px;
+        background: #100e2a;
+        padding: 56px 56px 52px;
+        position: relative;
+        overflow: hidden;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .bg1 { position: absolute; top: -80px; left: -80px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(120,60,200,0.3) 0%, transparent 70%); pointer-events: none; }
+    .bg2 { position: absolute; bottom: -60px; right: -40px; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(0,160,200,0.18) 0%, transparent 70%); pointer-events: none; }
+    .bg3 { position: absolute; top: 40px; right: 160px; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(220,40,120,0.12) 0%, transparent 70%); pointer-events: none; }
+    .bgrid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 32px 32px; pointer-events: none; }
+
+    .top-section { display: flex; align-items: center; gap: 48px; margin-bottom: 56px; position: relative; z-index: 2; }
+    .hero-left { flex: 1; }
+    .hero-right { flex: 0 0 380px; }
+
+    .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 5px 14px; margin-bottom: 24px; }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; }
+    .badge-text { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: rgba(255,255,255,0.75); text-transform: uppercase; }
+
+    .hero-h1 { font-size: clamp(32px, 4vw, 48px); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; color: #fff; margin-bottom: 18px; }
+    .grad { background: linear-gradient(90deg, #a78bfa, #ec4899, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .hero-desc { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.5); max-width: 400px; margin-bottom: 32px; }
+
+    .hero-actions { display: flex; gap: 12px; }
+    .btn-p { background: linear-gradient(135deg, #7c3aed, #db2777); color: #fff; font-size: 13px; font-weight: 600; padding: 10px 22px; border-radius: 8px; border: none; cursor: pointer; font-family: 'Inter', sans-serif; }
+    .btn-s { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.8); font-size: 13px; font-weight: 500; padding: 10px 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); cursor: pointer; font-family: 'Inter', sans-serif; }
+
+    .about-card { background: #1a1831; border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 24px; }
+    .card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .card-dots { display: flex; gap: 5px; }
+    .cd { width: 10px; height: 10px; border-radius: 50%; }
+    .cdr { background: #ff5f57; } .cdy { background: #febc2e; } .cdg { background: #28c840; }
+    .card-title { font-size: 11px; color: rgba(255,255,255,0.3); font-family: monospace; margin-left: auto; }
+
+    .profile-row { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #7c3aed, #ec4899); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .profile-info p:first-child { font-size: 14px; font-weight: 600; color: #fff; }
+    .profile-info p:last-child { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+    .stat-pills { display: flex; gap: 8px; margin-bottom: 20px; }
+    .pill { padding: 5px 12px; border-radius: 999px; font-size: 11.5px; font-weight: 600; font-family: monospace; }
+    .pill-a { background: #1e2d40; color: #60a5fa; }
+    .pill-b { background: #1f2d2a; color: #34d399; }
+    .pill-c { background: #2a2040; color: #a78bfa; }
+
+    .mini-bars { display: flex; flex-direction: column; gap: 8px; }
+    .mb-row { display: flex; align-items: center; gap: 10px; }
+    .mb-lbl { font-size: 11px; color: rgba(255,255,255,0.35); width: 60px; flex-shrink: 0; }
+    .mb-track { flex: 1; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.07); overflow: hidden; }
+    .mb-fill { height: 100%; border-radius: 3px; }
+    .mb-a { width: 88%; background: linear-gradient(90deg, #7c3aed, #ec4899); }
+    .mb-b { width: 72%; background: linear-gradient(90deg, #7c3aed, #22d3ee); }
+    .mb-c { width: 60%; background: linear-gradient(90deg, #ec4899, #f97316); }
+
+    .cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; position: relative; z-index: 2; }
+    .info-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 22px; }
+    .ic-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .ic-icon svg { width: 18px; height: 18px; }
+    .ic-a { background: rgba(124,58,237,0.2); }
+    .ic-b { background: rgba(34,211,238,0.15); }
+    .ic-c { background: rgba(236,72,153,0.15); }
+    .ic-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .ic-desc { font-size: 12.5px; line-height: 1.65; color: rgba(255,255,255,0.45); }
+    .ic-link { display: inline-block; margin-top: 14px; font-size: 12px; color: #a78bfa; text-decoration: none; font-weight: 500; }
+
+    .bottom-strip { display: flex; align-items: center; justify-content: space-between; margin-top: 40px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); position: relative; z-index: 2; }
+    .strip-stats { display: flex; gap: 36px; }
+    .ss-val { font-size: 13px; font-weight: 700; color: #fff; }
+    .ss-lbl { font-size: 12px; color: rgba(255,255,255,0.38); margin-left: 4px; }
+    .strip-cta { font-size: 13px; color: rgba(255,255,255,0.4); }
+    .strip-cta a { color: #a78bfa; text-decoration: none; font-weight: 500; margin-left: 6px; }
+</style>
+
+<div class="hero">
+    <div class="bg1"></div><div class="bg2"></div><div class="bg3"></div><div class="bgrid"></div>
+
+    <div class="top-section">
+        <div class="hero-left">
+            <div class="badge">
+                <div class="badge-dot"></div>
+                <span class="badge-text">About Us · Our Story</span>
+            </div>
+            <h1 class="hero-h1">Built by devs,<br><span class="grad">for the details.</span></h1>
+            <p class="hero-desc">MyMvcApp is a modern starting point for ASP.NET Core teams who care about velocity, design, and the small details users never notice — until they're missing.</p>
+            <div class="hero-actions">
+                <a asp-controller="Home" asp-action="Services" class="btn-p">Our services</a>
+                <a asp-controller="Home" asp-action="Team" class="btn-s">Meet the team →</a>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="about-card">
+                <div class="card-header">
+                    <div class="card-dots"><div class="cd cdr"></div><div class="cd cdy"></div><div class="cd cdg"></div></div>
+                    <span class="card-title">mymvcapp.local/about</span>
+                </div>
+                <div class="profile-row">
+                    <div class="avatar">M</div>
+                    <div class="profile-info">
+                        <p>MyMvcApp Team</p>
+                        <p>ASP.NET Core · Since 2021</p>
+                    </div>
+                </div>
+                <div class="stat-pills">
+                    <span class="pill pill-a">.NET 8</span>
+                    <span class="pill pill-b">Razor</span>
+                    <span class="pill pill-c">A11y</span>
+                </div>
+                <div class="mini-bars">
+                    <div class="mb-row"><span class="mb-lbl">Velocity</span><div class="mb-track"><div class="mb-fill mb-a"></div></div></div>
+                    <div class="mb-row"><span class="mb-lbl">Design</span><div class="mb-track"><div class="mb-fill mb-b"></div></div></div>
+                    <div class="mb-row"><span class="mb-lbl">A11y</span><div class="mb-track"><div class="mb-fill mb-c"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cards-row">
+        <div class="info-card">
+            <div class="ic-icon ic-a">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <div class="ic-title">Our mission</div>
+            <div class="ic-desc">We believe great software starts with great defaults. Every decision is shaped by real-world team feedback.</div>
+            <a href="#" class="ic-link">Learn more →</a>
+        </div>
+        <div class="info-card">
+            <div class="ic-icon ic-b">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="ic-title">The team</div>
+            <div class="ic-desc">A small group of engineers obsessed with clean architecture, accessibility, and shipping software that delights.</div>
+            <a href="#" class="ic-link">Meet us →</a>
+        </div>
+        <div class="info-card">
+            <div class="ic-icon ic-c">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="ic-title">Our values</div>
+            <div class="ic-desc">Velocity without shortcuts. Design without ego. Accessibility as a first-class feature — not an afterthought.</div>
+            <a href="#" class="ic-link">Read more →</a>
+        </div>
+    </div>
+
+    <div class="bottom-strip">
+        <div class="strip-stats">
+            <div><span class="ss-val">4.9★</span><span class="ss-lbl">rated by teams</span></div>
+            <div><span class="ss-val">120+</span><span class="ss-lbl">projects shipped</span></div>
+            <div><span class="ss-val">14d</span><span class="ss-lbl">avg. kickoff</span></div>
+        </div>
+        <div class="strip-cta">Ready to build?<a asp-controller="Home" asp-action="Services">Explore services →</a></div>
+    </div>
 </div>

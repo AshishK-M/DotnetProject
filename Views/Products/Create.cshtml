@@ -1,0 +1,8 @@
+@model MyMvcApp.Models.Product
+
+<form asp-action="Create" method="post">
+    <input asp-for="Name" placeholder="Name" />
+    <input asp-for="Price" placeholder="Price" />
+    <textarea asp-for="Description"></textarea>
+    <button type="submit">Save</button>
+</form>

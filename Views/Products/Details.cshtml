@@ -3,8 +3,117 @@
     ViewData["Title"] = Model.Name;
 }
 
-<h1>@Model.Name</h1>
-<h4 class="text-muted">@Model.Price.ToString("C")</h4>
-<p>@Model.Description</p>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/product-details.css" asp-append-version="true" />
 
-<a asp-action="Index" class="btn btn-link">&larr; Back to products</a>
+<div class="page-wrap">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <div class="bg3"></div>
+    <div class="bgrid"></div>
+
+    <a asp-action="Index" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M19 12H5M12 5l-7 7 7 7"/>
+        </svg>
+        Back to products
+    </a>
+
+    <div class="content">
+        <div class="detail-left">
+            <div class="badge">
+                <div class="badge-dot"></div>
+                <span class="badge-text">Plan Details</span>
+            </div>
+            <h1 class="product-name">
+                @Model.Name <span class="grad">Plan</span>
+            </h1>
+            <div class="price-row">
+                <span class="price-val">@Model.Price.ToString("C")</span>
+                <span class="price-per">/ month</span>
+            </div>
+            <p class="desc">@Model.Description</p>
+
+            @if (Model.Features != null && Model.Features.Any())
+            {
+                <div class="features">
+                    @foreach (var feature in Model.Features)
+                    {
+                        <div class="feat-item">
+                            <div class="feat-check">
+                                <svg viewBox="0 0 10 10" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round">
+                                    <path d="M2 5l2 2 4-4"/>
+                                </svg>
+                            </div>
+                            @feature
+                        </div>
+                    }
+                </div>
+            }
+
+            <div class="actions">
+                <a href="/Contact" class="btn-grad">Get started</a>
+                <a href="/Contact" class="btn-out">Contact sales</a>
+            </div>
+        </div>
+
+        <div class="detail-right">
+            <div class="detail-card">
+                <div class="dc-header">
+                    <div class="dc-dots">
+                        <div class="dot dr"></div>
+                        <div class="dot dy"></div>
+                        <div class="dot dg"></div>
+                    </div>
+                    <span class="dc-label">mymvcapp.local/products/@Model.Id</span>
+                </div>
+                <div class="dc-body">
+                    <div class="plan-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <div class="dc-name">@Model.Name Plan</div>
+                    <div class="dc-sub">Billed monthly · Cancel anytime</div>
+                    <div class="pills">
+                        <span class="pill p-a">.NET 8</span>
+                        <span class="pill p-b">Active</span>
+                        <span class="pill p-c">Popular</span>
+                    </div>
+                    <div class="dc-divider"></div>
+                    <div class="meta-rows">
+                        <div class="meta-row">
+                            <span class="meta-key">Price</span>
+                            <span class="meta-val">@Model.Price.ToString("C") / mo</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-key">Product ID</span>
+                            <span class="meta-val">#@Model.Id</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-key">Status</span>
+                            <span class="meta-val green">Available</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-key">Trial</span>
+                            <span class="meta-val green">14 days free</span>
+                        </div>
+                    </div>
+                    <div class="bar-section">
+                        <div class="bar-label">Popularity score</div>
+                        <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-strip">
+        <div class="strip-stats">
+            <div><span class="ss-val">4.9★</span><span class="ss-lbl">rated by teams</span></div>
+            <div><span class="ss-val">120+</span><span class="ss-lbl">projects shipped</span></div>
+            <div><span class="ss-val">14d</span><span class="ss-lbl">avg. kickoff</span></div>
+        </div>
+        <div class="strip-note">All plans include a <span>14-day free trial</span>. No credit card required.</div>
+    </div>
+</div>

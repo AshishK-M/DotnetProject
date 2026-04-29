@@ -1,0 +1,9 @@
+@model MyMvcApp.Models.Product
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input asp-for="Name" />
+    <input asp-for="Price" />
+    <textarea asp-for="Description"></textarea>
+    <button type="submit">Update</button>
+</form>

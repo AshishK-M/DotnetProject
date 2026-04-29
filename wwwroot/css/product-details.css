@@ -1,0 +1,91 @@
+* { box-sizing: border-box; }
+
+.page-wrap {
+    margin: 20px 24px;
+    border-radius: 20px;
+    background: #100e2a;
+    padding: 56px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+.bg1 { position: absolute; top: -80px; left: -80px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(120,60,200,0.3) 0%, transparent 70%); pointer-events: none; }
+.bg2 { position: absolute; bottom: -60px; right: -40px; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(0,160,200,0.18) 0%, transparent 70%); pointer-events: none; }
+.bg3 { position: absolute; top: 40px; right: 160px; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(220,40,120,0.1) 0%, transparent 70%); pointer-events: none; }
+.bgrid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 32px 32px; pointer-events: none; }
+
+.back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12.5px; color: rgba(255,255,255,0.4); text-decoration: none;
+    font-weight: 500; margin-bottom: 36px; position: relative; z-index: 2;
+}
+.back-link:hover { color: rgba(255,255,255,0.75); }
+.back-link svg { width: 14px; height: 14px; }
+
+.content { display: flex; align-items: flex-start; gap: 48px; position: relative; z-index: 2; }
+.detail-left { flex: 1; }
+.detail-right { flex: 0 0 360px; }
+
+.badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 5px 14px; margin-bottom: 22px; }
+.badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; }
+.badge-text { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: rgba(255,255,255,0.75); text-transform: uppercase; }
+
+.product-name { font-size: clamp(32px, 4vw, 48px); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; color: #fff; margin-bottom: 14px; }
+.grad { background: linear-gradient(90deg, #a78bfa, #ec4899, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 24px; }
+.price-val { font-size: 36px; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+.price-per { font-size: 14px; color: rgba(255,255,255,0.35); }
+
+.desc { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.5); max-width: 440px; margin-bottom: 32px; }
+
+.features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+.feat-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.55); }
+.feat-check { width: 18px; height: 18px; border-radius: 50%; background: rgba(124,58,237,0.25); border: 1px solid rgba(124,58,237,0.4); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.feat-check svg { width: 10px; height: 10px; }
+
+.actions { display: flex; gap: 12px; }
+.btn-grad { background: linear-gradient(135deg, #7c3aed, #db2777); color: #fff; font-size: 13.5px; font-weight: 600; padding: 12px 28px; border-radius: 9px; border: none; cursor: pointer; font-family: 'Inter', sans-serif; text-decoration: none; display: inline-block; }
+.btn-out { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.75); font-size: 13.5px; font-weight: 500; padding: 12px 24px; border-radius: 9px; border: 1px solid rgba(255,255,255,0.12); cursor: pointer; font-family: 'Inter', sans-serif; text-decoration: none; display: inline-block; }
+
+.detail-card { background: #1a1831; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; }
+.dc-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #161428; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.dc-dots { display: flex; gap: 5px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dr { background: #ff5f57; } .dy { background: #febc2e; } .dg { background: #28c840; }
+.dc-label { font-size: 11px; color: rgba(255,255,255,0.28); font-family: monospace; }
+.dc-body { padding: 24px; }
+
+.plan-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(219,39,119,0.3)); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+.plan-icon svg { width: 24px; height: 24px; }
+
+.dc-name { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.dc-sub { font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
+
+.pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.pill { padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; font-family: monospace; }
+.p-a { background: #1e2d40; color: #60a5fa; }
+.p-b { background: #1f2d2a; color: #34d399; }
+.p-c { background: #2a2040; color: #a78bfa; }
+
+.dc-divider { height: 1px; background: rgba(255,255,255,0.07); margin-bottom: 18px; }
+
+.meta-rows { display: flex; flex-direction: column; gap: 12px; }
+.meta-row { display: flex; align-items: center; justify-content: space-between; }
+.meta-key { font-size: 12px; color: rgba(255,255,255,0.35); }
+.meta-val { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.75); }
+.meta-val.green { color: #34d399; }
+.meta-val.purple { color: #a78bfa; }
+
+.bar-section { margin-top: 18px; }
+.bar-label { font-size: 11px; color: rgba(255,255,255,0.3); margin-bottom: 8px; }
+.bar-track { height: 5px; border-radius: 3px; background: rgba(255,255,255,0.07); overflow: hidden; }
+.bar-fill { height: 100%; width: 78%; border-radius: 3px; background: linear-gradient(90deg, #7c3aed, #ec4899); }
+
+.bottom-strip { display: flex; align-items: center; justify-content: space-between; margin-top: 44px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); position: relative; z-index: 2; }
+.strip-stats { display: flex; gap: 36px; }
+.ss-val { font-size: 13px; font-weight: 700; color: #fff; }
+.ss-lbl { font-size: 12px; color: rgba(255,255,255,0.38); margin-left: 4px; }
+.strip-note { font-size: 12.5px; color: rgba(255,255,255,0.3); }
+.strip-note span { color: #a78bfa; }

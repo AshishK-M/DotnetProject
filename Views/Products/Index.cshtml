@@ -4,28 +4,71 @@
     ViewData["Title"] = "Products";
 }
 
-<h1>Products</h1>
-<p>Browse our available plans.</p>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/products.css" asp-append-version="true" />
 
-<div class="row">
-    @foreach (var product in Model)
-    {
-        <div class="col-md-4 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">@product.Name</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">
-                        @product.Price.ToString("C")
-                    </h6>
-                    <p class="card-text">@product.Description</p>
+<div class="page-wrap">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <div class="bgrid"></div>
 
-                    <a asp-action="Details"
-                       asp-route-id="@product.Id"
-                       class="btn btn-outline-primary">
-                       Details
-                    </a>
-                </div>
-            </div>
+    <div class="page-header">
+        <div class="badge">
+            <div class="badge-dot"></div>
+            <span class="badge-text">Pricing · Plans</span>
         </div>
-    }
+        <h1 class="page-h1">Browse our <span class="grad">available plans.</span></h1>
+        <p class="page-sub">Choose the plan that fits your team. Upgrade or downgrade anytime.</p>
+    </div>
+<h1>Products</h1>
+
+<a asp-action="Create">+ Add Product</a>
+
+@foreach (var p in Model)
+{
+    <div>
+        <h3>@p.Name</h3>
+        <p>@p.Price</p>
+        <a asp-action="Details" asp-route-id="@p.Id">Details</a>
+        <a asp-action="Edit" asp-route-id="@p.Id">Edit</a>
+        <a asp-action="Delete" asp-route-id="@p.Id">Delete</a>
+    </div>
+}
+    <div class="cards-grid">
+        @foreach (var product in Model)
+        {
+            var isFeatured = product.IsFeatured;
+            <div class="product-card @(isFeatured ? "featured" : "")">
+                @if (isFeatured)
+                {
+                    <span class="featured-badge">Most Popular</span>
+                }
+                <div class="card-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+                <div class="card-name">@product.Name</div>
+                <div class="card-price">
+                    @product.Price.ToString("C")<small>/mo</small>
+                </div>
+                <p class="card-desc">@product.Description</p>
+                <div class="divider"></div>
+                <a asp-action="Details"
+                   asp-route-id="@product.Id"
+                   class="card-btn @(isFeatured ? "btn-grad" : "btn-outline")">
+                    View Details
+                </a>
+            </div>
+        }
+    </div>
+
+    <div class="bottom-strip">
+        <div class="strip-stats">
+            <div><span class="ss-val">4.9★</span><span class="ss-lbl">rated by teams</span></div>
+            <div><span class="ss-val">120+</span><span class="ss-lbl">projects shipped</span></div>
+            <div><span class="ss-val">14d</span><span class="ss-lbl">avg. kickoff</span></div>
+        </div>
+        <div class="strip-note">All plans include a <span>14-day free trial</span>. No credit card required.</div>
+    </div>
 </div>

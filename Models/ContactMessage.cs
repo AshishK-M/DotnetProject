@@ -4,6 +4,7 @@ namespace MyMvcApp.Models;
 
 public class ContactMessage
 {
+    public int Id { get; set; }
     [Required]
     [StringLength(80)]
     public string Name { get; set; } = string.Empty;

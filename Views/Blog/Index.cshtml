@@ -1,20 +1,68 @@
 @model IEnumerable<BlogPost>
 @{
     ViewData["Title"] = "Blog";
+    var posts = Model.ToList();
+    var featured = posts.FirstOrDefault();
+    var rest = posts.Skip(1).ToList();
 }
 
-<h1>Blog</h1>
-<p>Latest news and updates from the team.</p>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/blog.css" asp-append-version="true" />
 
-<ul class="list-unstyled">
-    @foreach (var post in Model)
+<div class="page-wrap">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <div class="bgrid"></div>
+
+    <div class="page-header">
+        <div class="badge">
+            <div class="badge-dot"></div>
+            <span class="badge-text">The Journal</span>
+        </div>
+        <h1 class="page-h1">Stories, ideas, and <span class="grad">updates.</span></h1>
+        <p class="page-sub">A look behind the scenes at what we're shipping and learning.</p>
+    </div>
+
+    @if (featured is not null)
     {
-        <li class="mb-4">
-            <h3>
-                <a asp-action="Post" asp-route-id="@post.Id">@post.Title</a>
-            </h3>
-            <small class="text-muted">By @post.Author on @post.PublishedOn.ToString("MMMM d, yyyy")</small>
-            <p>@post.Body</p>
-        </li>
+        <a asp-action="Post" asp-route-id="@featured.Id" class="featured-post">
+            <div class="featured-date">
+                <div class="featured-day">@featured.PublishedOn.Day</div>
+                <div class="featured-month">@featured.PublishedOn.ToString("MMM yyyy")</div>
+            </div>
+            <div>
+                <span class="featured-tag">Featured</span>
+                <div class="featured-title">@featured.Title</div>
+                <div class="featured-meta">By @featured.Author &middot; @featured.PublishedOn.ToString("MMMM d, yyyy")</div>
+                <p class="featured-body">@featured.Body</p>
+            </div>
+        </a>
     }
-</ul>
+
+    @if (rest.Any())
+    {
+        <div class="more-label">More posts</div>
+        <div class="posts-grid">
+            @foreach (var post in rest)
+            {
+                <a asp-action="Post" asp-route-id="@post.Id" class="post-card">
+                    <div class="post-date">
+                        <div class="post-day-pill">@post.PublishedOn.Day</div>
+                        <div class="post-month">@post.PublishedOn.ToString("MMM yyyy")</div>
+                    </div>
+                    <div class="post-title">@post.Title</div>
+                    <p class="post-body">@post.Body</p>
+                    <div class="post-foot">
+                        <span class="post-author">By @post.Author</span>
+                        <span class="post-read">Read &rarr;</span>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+
+    @if (!posts.Any())
+    {
+        <div class="empty">No posts yet. Check back soon.</div>
+    }
+</div>
