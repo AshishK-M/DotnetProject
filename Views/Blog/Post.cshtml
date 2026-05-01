@@ -1,6 +1,7 @@
 @model BlogPost
 @{
     ViewData["Title"] = Model.Title;
+    var isAdmin = User.IsInRole(Roles.Admin);
 }
 
 <article>
@@ -10,3 +11,7 @@
 </article>
 
 <a asp-action="Index" class="btn btn-link">&larr; Back to blog</a>
+@if (isAdmin)
+{
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger ms-2">Delete</a>
+}

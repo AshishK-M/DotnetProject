@@ -1,0 +1,34 @@
+@model BlogPost
+@{
+    ViewData["Title"] = "Delete post";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/blog.css" asp-append-version="true" />
+
+<div class="page-wrap">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <div class="bgrid"></div>
+
+    <div class="page-header">
+        <div class="badge">
+            <div class="badge-dot"></div>
+            <span class="badge-text">Confirm</span>
+        </div>
+        <h1 class="page-h1">Delete this <span class="grad">post?</span></h1>
+        <p class="page-sub">This will permanently remove the post from the journal.</p>
+    </div>
+
+    <article class="confirm-card">
+        <h2>@Model.Title</h2>
+        <p class="text-muted">By @Model.Author &middot; @Model.PublishedOn.ToString("MMMM d, yyyy")</p>
+        <p>@Model.Body</p>
+    </article>
+
+    <form asp-action="Delete" method="post" class="form-actions">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Yes, delete</button>
+        <a asp-action="Index" class="btn btn-link">Cancel</a>
+    </form>
+</div>

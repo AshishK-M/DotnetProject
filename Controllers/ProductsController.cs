@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyMvcApp.Models;
 using MyMvcApp.Services;
@@ -28,12 +29,15 @@ namespace MyMvcApp.Controllers
         }
 
         // CREATE
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.Admin)]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Product product)
         {
             if (!ModelState.IsValid) return View(product);
@@ -43,6 +47,7 @@ namespace MyMvcApp.Controllers
         }
 
         // UPDATE
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Edit(int id)
         {
             var product = await _productService.GetProductById(id);
@@ -51,6 +56,8 @@ namespace MyMvcApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.Admin)]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Product product)
         {
             if (!ModelState.IsValid) return View(product);
@@ -60,6 +67,7 @@ namespace MyMvcApp.Controllers
         }
 
         // DELETE
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Delete(int id)
         {
             var product = await _productService.GetProductById(id);
@@ -68,6 +76,8 @@ namespace MyMvcApp.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = Roles.Admin)]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _productService.DeleteProduct(id);

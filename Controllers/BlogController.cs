@@ -1,29 +1,63 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyMvcApp.Models;
+using MyMvcApp.Services;
 
 namespace MyMvcApp.Controllers;
 
 public class BlogController : Controller
 {
-    private static readonly List<BlogPost> Posts = new()
-    {
-        new BlogPost { Id = 1, Title = "Welcome to the Blog", Author = "Team", PublishedOn = new DateTime(2026, 1, 15), Body = "This is our very first post. Stay tuned for more updates." },
-        new BlogPost { Id = 2, Title = "Shipping Faster with MVC", Author = "Team", PublishedOn = new DateTime(2026, 2, 10), Body = "A few patterns we use to keep iteration speed high." },
-        new BlogPost { Id = 3, Title = "Designing Clean Views", Author = "Team", PublishedOn = new DateTime(2026, 3, 22), Body = "Tips for keeping Razor templates simple and maintainable." }
-    };
+    private readonly BlogService _blogService;
 
-    public IActionResult Index()
+    public BlogController(BlogService blogService)
     {
-        return View(Posts.OrderByDescending(p => p.PublishedOn).ToList());
+        _blogService = blogService;
     }
 
-    public IActionResult Post(int id)
+    public async Task<IActionResult> Index()
     {
-        var post = Posts.FirstOrDefault(p => p.Id == id);
-        if (post is null)
-        {
-            return NotFound();
-        }
+        var posts = await _blogService.GetAllPosts();
+        return View(posts);
+    }
+
+    public async Task<IActionResult> Post(int id)
+    {
+        var post = await _blogService.GetPostById(id);
+        if (post is null) return NotFound();
         return View(post);
+    }
+
+    [Authorize(Roles = Roles.Admin)]
+    public IActionResult Create()
+    {
+        return View(new BlogPost { PublishedOn = DateTime.Today });
+    }
+
+    [HttpPost]
+    [Authorize(Roles = Roles.Admin)]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(BlogPost post)
+    {
+        if (!ModelState.IsValid) return View(post);
+
+        await _blogService.AddPost(post);
+        return RedirectToAction(nameof(Index));
+    }
+
+    [Authorize(Roles = Roles.Admin)]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var post = await _blogService.GetPostById(id);
+        if (post is null) return NotFound();
+        return View(post);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    [Authorize(Roles = Roles.Admin)]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        await _blogService.DeletePost(id);
+        return RedirectToAction(nameof(Index));
     }
 }

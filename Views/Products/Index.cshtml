@@ -20,20 +20,14 @@
         <h1 class="page-h1">Browse our <span class="grad">available plans.</span></h1>
         <p class="page-sub">Choose the plan that fits your team. Upgrade or downgrade anytime.</p>
     </div>
-<h1>Products</h1>
 
-<a asp-action="Create">+ Add Product</a>
+    @if (User.IsInRole(Roles.Admin))
+    {
+        <div class="admin-toolbar">
+            <a asp-action="Create" class="admin-btn admin-btn-primary">+ Add Product</a>
+        </div>
+    }
 
-@foreach (var p in Model)
-{
-    <div>
-        <h3>@p.Name</h3>
-        <p>@p.Price</p>
-        <a asp-action="Details" asp-route-id="@p.Id">Details</a>
-        <a asp-action="Edit" asp-route-id="@p.Id">Edit</a>
-        <a asp-action="Delete" asp-route-id="@p.Id">Delete</a>
-    </div>
-}
     <div class="cards-grid">
         @foreach (var product in Model)
         {
@@ -59,6 +53,14 @@
                    class="card-btn @(isFeatured ? "btn-grad" : "btn-outline")">
                     View Details
                 </a>
+                @if (User.IsInRole(Roles.Admin))
+                {
+                    <div class="card-admin-actions">
+                        <a asp-action="Edit" asp-route-id="@product.Id" class="admin-link">Edit</a>
+                        <span class="admin-sep">·</span>
+                        <a asp-action="Delete" asp-route-id="@product.Id" class="admin-link admin-link-danger">Delete</a>
+                    </div>
+                }
             </div>
         }
     </div>

@@ -1,6 +1,8 @@
+using System.Text.Json;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using MyMvcApp.Data;
 using MyMvcApp.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace MyMvcApp.Services
 {
@@ -15,34 +17,58 @@ namespace MyMvcApp.Services
 
         public async Task<List<Product>> GetAllProducts()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products
+                .FromSqlRaw("EXEC sp_GetProducts")
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<Product?> GetProductById(int id)
         {
-            return await _context.Products.FindAsync(id);
+            var results = await _context.Products
+                .FromSqlRaw("EXEC sp_GetProductById @Id",
+                    new SqlParameter("@Id", id))
+                .AsNoTracking()
+                .ToListAsync();
+            return results.FirstOrDefault();
         }
 
         public async Task AddProduct(Product product)
         {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
+            var featuresJson = JsonSerializer.Serialize(product.Features ?? new());
+
+            var ids = await _context.Database
+                .SqlQueryRaw<int>(
+                    "EXEC sp_AddProduct @Name, @Price, @Description, @IsFeatured, @Features",
+                    new SqlParameter("@Name", product.Name),
+                    new SqlParameter("@Price", product.Price),
+                    new SqlParameter("@Description", product.Description),
+                    new SqlParameter("@IsFeatured", product.IsFeatured),
+                    new SqlParameter("@Features", featuresJson))
+                .ToListAsync();
+
+            product.Id = ids.First();
         }
 
         public async Task UpdateProduct(Product product)
         {
-            _context.Products.Update(product);
-            await _context.SaveChangesAsync();
+            var featuresJson = JsonSerializer.Serialize(product.Features ?? new());
+
+            await _context.Database.ExecuteSqlRawAsync(
+                "EXEC sp_UpdateProduct @Id, @Name, @Price, @Description, @IsFeatured, @Features",
+                new SqlParameter("@Id", product.Id),
+                new SqlParameter("@Name", product.Name),
+                new SqlParameter("@Price", product.Price),
+                new SqlParameter("@Description", product.Description),
+                new SqlParameter("@IsFeatured", product.IsFeatured),
+                new SqlParameter("@Features", featuresJson));
         }
 
         public async Task DeleteProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product != null)
-            {
-                _context.Products.Remove(product);
-                await _context.SaveChangesAsync();
-            }
+            await _context.Database.ExecuteSqlRawAsync(
+                "EXEC sp_DeleteProduct @Id",
+                new SqlParameter("@Id", id));
         }
     }
 }

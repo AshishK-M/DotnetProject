@@ -4,6 +4,7 @@
     var posts = Model.ToList();
     var featured = posts.FirstOrDefault();
     var rest = posts.Skip(1).ToList();
+    var isAdmin = User.IsInRole(Roles.Admin);
 }
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -21,22 +22,32 @@
         </div>
         <h1 class="page-h1">Stories, ideas, and <span class="grad">updates.</span></h1>
         <p class="page-sub">A look behind the scenes at what we're shipping and learning.</p>
+        @if (isAdmin)
+        {
+            <a asp-action="Create" class="btn btn-primary mt-3">+ New post</a>
+        }
     </div>
 
     @if (featured is not null)
     {
-        <a asp-action="Post" asp-route-id="@featured.Id" class="featured-post">
-            <div class="featured-date">
-                <div class="featured-day">@featured.PublishedOn.Day</div>
-                <div class="featured-month">@featured.PublishedOn.ToString("MMM yyyy")</div>
-            </div>
-            <div>
-                <span class="featured-tag">Featured</span>
-                <div class="featured-title">@featured.Title</div>
-                <div class="featured-meta">By @featured.Author &middot; @featured.PublishedOn.ToString("MMMM d, yyyy")</div>
-                <p class="featured-body">@featured.Body</p>
-            </div>
-        </a>
+        <div class="featured-wrap">
+            <a asp-action="Post" asp-route-id="@featured.Id" class="featured-post">
+                <div class="featured-date">
+                    <div class="featured-day">@featured.PublishedOn.Day</div>
+                    <div class="featured-month">@featured.PublishedOn.ToString("MMM yyyy")</div>
+                </div>
+                <div>
+                    <span class="featured-tag">Featured</span>
+                    <div class="featured-title">@featured.Title</div>
+                    <div class="featured-meta">By @featured.Author &middot; @featured.PublishedOn.ToString("MMMM d, yyyy")</div>
+                    <p class="featured-body">@featured.Body</p>
+                </div>
+            </a>
+            @if (isAdmin)
+            {
+                <a asp-action="Delete" asp-route-id="@featured.Id" class="btn btn-sm btn-outline-danger admin-delete">Delete</a>
+            }
+        </div>
     }
 
     @if (rest.Any())
@@ -45,18 +56,24 @@
         <div class="posts-grid">
             @foreach (var post in rest)
             {
-                <a asp-action="Post" asp-route-id="@post.Id" class="post-card">
-                    <div class="post-date">
-                        <div class="post-day-pill">@post.PublishedOn.Day</div>
-                        <div class="post-month">@post.PublishedOn.ToString("MMM yyyy")</div>
-                    </div>
-                    <div class="post-title">@post.Title</div>
-                    <p class="post-body">@post.Body</p>
-                    <div class="post-foot">
-                        <span class="post-author">By @post.Author</span>
-                        <span class="post-read">Read &rarr;</span>
-                    </div>
-                </a>
+                <div class="post-card-wrap">
+                    <a asp-action="Post" asp-route-id="@post.Id" class="post-card">
+                        <div class="post-date">
+                            <div class="post-day-pill">@post.PublishedOn.Day</div>
+                            <div class="post-month">@post.PublishedOn.ToString("MMM yyyy")</div>
+                        </div>
+                        <div class="post-title">@post.Title</div>
+                        <p class="post-body">@post.Body</p>
+                        <div class="post-foot">
+                            <span class="post-author">By @post.Author</span>
+                            <span class="post-read">Read &rarr;</span>
+                        </div>
+                    </a>
+                    @if (isAdmin)
+                    {
+                        <a asp-action="Delete" asp-route-id="@post.Id" class="btn btn-sm btn-outline-danger admin-delete">Delete</a>
+                    }
+                </div>
             }
         </div>
     }
